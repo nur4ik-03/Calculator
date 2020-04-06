@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,169 +9,181 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    TextView resultField;
-    Double firstValue, secondValue, result;
+    TextView result;
+    Double firstValues, secondValues, result_op;
     String operation;
-    String savedOp;
 
+    private static final String FISRT = "FISRT";
+    private static final String SECOND = "SECOND";
+    private static final String OPERATION = "OPERATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        resultField = findViewById(R.id.resultField);
+        result = findViewById(R.id.resultField);
         if (savedInstanceState != null) {
-            firstValue = savedInstanceState.getDouble("firstValue",firstValue);
-            secondValue = savedInstanceState.getDouble("secondValue",secondValue);
-            operation = savedInstanceState.getString("operation",operation);
+            firstValues = savedInstanceState.getDouble(FISRT);
+            secondValues = savedInstanceState.getDouble(SECOND);
+            operation = savedInstanceState.getString(OPERATION);
         }
-
-    }
-
-    public void onNumberClick(View view) {
-        switch (view.getId()) {
-            case R.id.zero:
-                resultField.append("0");
-                break;
-            case R.id.one:
-                resultField.append("1");
-                break;
-            case R.id.two:
-                resultField.append("2");
-                break;
-            case R.id.three:
-                resultField.append("3");
-                break;
-            case R.id.four:
-                resultField.append("4");
-                break;
-            case R.id.five:
-                resultField.append("5");
-                break;
-            case R.id.six:
-                resultField.append("6");
-                break;
-            case R.id.seven:
-                resultField.append("7");
-                break;
-            case R.id.eight:
-                resultField.append("8");
-                break;
-            case R.id.nine:
-                resultField.append("9");
-                break;
-            case R.id.clear:
-                resultField.setText("");
-                break;
-            case R.id.dot:
-                String str=resultField.getText().toString().trim();
-                if(str.length()>0){
-                    resultField.setText(str+".");
-                }else{
-                    resultField.setText("0.");
-                }
-        }
-    }
-
-    public void onOperationClick(View view) {
-        switch (view.getId()) {
-            case R.id.plus:
-                firstValue = Double.valueOf(resultField.getText().toString());
-                resultField.setText(firstValue + "+");
-                operation = "+";
-                break;
-            case R.id.division:
-                firstValue = Double.valueOf(resultField.getText().toString());
-                resultField.setText(firstValue + "/");
-                operation = "/";
-                break;
-            case R.id.multiply:
-                firstValue = Double.valueOf(resultField.getText().toString());
-                resultField.setText(firstValue + "*");
-                operation = "*";
-                break;
-            case R.id.minus:
-                firstValue = Double.valueOf(resultField.getText().toString());
-                resultField.setText(firstValue + "-");
-                operation = "-";
-                break;
-            case R.id.equal:
-                String two = resultField.getText().toString().replace(firstValue.toString() + operation, "");
-                secondValue = Double.valueOf(two);
-                if (operation == "+") {
-                    result = firstValue + secondValue;
-                    resultField.setText(result.toString());
-                    operation = "+";
-                }
-                if (operation == "-") {
-                    result = firstValue - secondValue;
-                    resultField.setText(result.toString());
-                    operation = "-";
-                }
-                if (operation == "*") {
-                    result = firstValue * secondValue;
-                    resultField.setText(result.toString());
-                    operation = "*";
-                }
-                if (operation == "/") {
-                    result = firstValue / secondValue;
-                    resultField.setText(result.toString());
-                    operation = "/";
-                }
-                break;
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (firstValue != null) {
-            outState.putDouble("firstValue",firstValue);
-        }
-        if (secondValue != null) {
-            outState.putDouble("secondValue",secondValue);
-        }
-        if (operation != null) {
-            outState.putString("operation", operation);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("ololo", "onResume");
+        Log.d("scalc", "onCreate");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("ololo", "onStart");
+        Log.d("scalc", "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("scalc", "onResume");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("ololo", "onStop");
+        Log.d("scalc", "onStop");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("ololo", "onRestart");
+        Log.d("scalc", "onRestart");
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("ololo", "onDestroy");
+        Log.d("scalc", "onDestroy");
     }
 
-    public void onFirstClick(View view) {
-        savedOp = "new saved String";
-        Log.d("ololo", "Successfully saved " + savedOp);
+    public void onNumberClick(View view) {
+        switch (view.getId()) {
+            case R.id.seven:
+                result.append("7");
+                break;
+            case R.id.eight:
+                result.append("8");
+                break;
+            case R.id.nine:
+                result.append("9");
+                break;
+            case R.id.four:
+                result.append("4");
+                break;
+            case R.id.five:
+                result.append("5");
+                break;
+            case R.id.six:
+                result.append("6");
+                break;
+            case R.id.one:
+                result.append("1");
+                break;
+            case R.id.two:
+                result.append("2");
+                break;
+            case R.id.three:
+                result.append("3");
+                break;
+            case R.id.zero:
+                result.append("0");
+                break;
+            case R.id.clear:
+                result.setText("");
+                break;
+            case R.id.dot:
+                String string = (result.getText().toString().trim());
+                if (string.length() > 0) {
+                    result.setText(string + ".");
+                    break;
+                }
+        }
+    }
+
+
+    public void onOperationClick(View view) {
+        switch (view.getId()) {
+            case R.id.plus:
+                firstValues = Double.valueOf(result.getText().toString());
+                result.setText(firstValues + "+");
+                operation = "+";
+                break;
+            case R.id.division:
+                firstValues = Double.valueOf(result.getText().toString());
+                result.setText(firstValues + "/");
+                operation = "/";
+                break;
+            case R.id.minus:
+                firstValues = Double.valueOf(result.getText().toString());
+                result.setText(firstValues + "-");
+                operation = "-";
+                break;
+            case R.id.multiply:
+                firstValues = Double.valueOf(result.getText().toString());
+                result.setText(firstValues + "*");
+                operation = "*";
+                break;
+            case R.id.equal:
+                if (operation != null) {
+                    String two = result.getText().toString().replace(firstValues.toString() + operation, "");
+                    secondValues = Double.valueOf(two);
+                    switch (operation) {
+                        case "+":
+                            plusOperation();
+                            break;
+                        case "/":
+                            divisionOperation();
+                            break;
+                        case "-":
+                            minusOperation();
+                            break;
+                        case "*":
+                            multiplicationOperation();
+                            break;
+                    }
+                }
+
+        }
+    }
+
+    public void plusOperation() {
+        result_op = firstValues + secondValues;
+        result.setText(result_op.toString());
+    }
+
+    public void divisionOperation() {
+        result_op = firstValues / secondValues;
+        result.setText(result_op.toString());
+
+    }
+
+    public void minusOperation() {
+        result_op = firstValues - secondValues;
+        result.setText(result_op.toString());
+    }
+
+    public void multiplicationOperation() {
+        result_op = firstValues * secondValues;
+        result.setText(result_op.toString());
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (firstValues != null) {
+            outState.putDouble(FISRT, firstValues);
+        }
+        if (secondValues != null) {
+            outState.putDouble(SECOND, secondValues);
+        }
+        if (operation != null) {
+            outState.putString(OPERATION, operation);
+        }
+
     }
 }
-
-
