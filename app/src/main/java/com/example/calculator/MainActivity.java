@@ -3,8 +3,7 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,12 +12,20 @@ public class MainActivity extends AppCompatActivity {
     TextView resultField;
     Double firstValue, secondValue, result;
     String operation;
+    String savedOp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         resultField = findViewById(R.id.resultField);
+        if (savedInstanceState != null) {
+            firstValue = savedInstanceState.getDouble("firstValue",firstValue);
+            secondValue = savedInstanceState.getDouble("secondValue",secondValue);
+            operation = savedInstanceState.getString("operation",operation);
+        }
+
     }
 
     public void onNumberClick(View view) {
@@ -115,10 +122,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void operationPlus() {
-        result = firstValue + secondValue;
-        resultField.setText(result.toString());
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (firstValue != null) {
+            outState.putDouble("firstValue",firstValue);
+        }
+        if (secondValue != null) {
+            outState.putDouble("secondValue",secondValue);
+        }
+        if (operation != null) {
+            outState.putString("operation", operation);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ololo", "onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("ololo", "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("ololo", "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("ololo", "onRestart");
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ololo", "onDestroy");
+    }
+
+    public void onFirstClick(View view) {
+        savedOp = "new saved String";
+        Log.d("ololo", "Successfully saved " + savedOp);
+    }
 }
+
+
