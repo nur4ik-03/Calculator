@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Main2Activity">
+
+<TextView
+    android:gravity="center_vertical"
+    android:textSize="40sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/Text11"
+    />
+
+    <Button
+        android:id="@+id/openCalcolator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculator"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="190dp"
+        />
+
+    <Button
+        android:onClick="Share"
+        android:id="@+id/Share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:layout_marginLeft="143dp"
+
+        />
+
+
+
+
+</LinearLayout>

@@ -3,23 +3,27 @@ package com.example.calculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
     TextView result;
     Double firstValues, secondValues, result_op;
     String operation;
 
-    private static final String FISRT = "FISRT";
-    private static final String SECOND = "SECOND";
-    private static final String OPERATION = "OPERATION";
+    public static final String FISRT = "FISRT";
+    public static final String SECOND = "SECOND";
+    public static final String OPERATION = "OPERATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         result = findViewById(R.id.resultField);
         if (savedInstanceState != null) {
@@ -185,5 +189,12 @@ public class MainActivity extends AppCompatActivity {
             outState.putString(OPERATION, operation);
         }
 
+    }
+
+    public void onSaveClick(View view) {
+        Intent intent = new Intent();
+        intent.putExtra("save", result.getText().toString());
+        setResult(RESULT_OK , intent);
+        finish();
     }
 }
